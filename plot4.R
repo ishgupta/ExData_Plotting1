@@ -1,3 +1,11 @@
+powerConsumption <- read.table(file = "household_power_consumption.txt", header = TRUE, na.strings = "?", sep = ";")
+dateTime <- paste(powerConsumption$Date, powerConsumption$Time)
+dateTime <- as.POSIXlt(dateTime, format = "%d/%m/%Y %H:%M:%S")
+powerConsumption <- cbind(dateTime, powerConsumption)
+powerConsumption <- powerConsumption[,-c(2,3)]
+
+testData <- subset(powerConsumption, dateTime > "2007-02-01 00:00:00" & dateTime < "2007-02-03 00:00:00")
+
 plot.new()
 par(mfrow = c(2,2))
 
